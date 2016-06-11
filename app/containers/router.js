@@ -3,13 +3,13 @@ import {
   Navigator
 } from 'react-native';
 
-import Index from '../containers/index';
+import HomePage from '../containers/home-page';
 
 class Router extends Component {
   renderScene(route, nav){
     switch (route.name) {
     case 'Index':
-      return <Index />;
+      return <HomePage />;
     }
   }
   render() {

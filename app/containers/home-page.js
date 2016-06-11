@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect  } from 'react-redux';
 
 import Styles from './../stylesheets/home-styles';
+import Button from './../components/button';
+
 import * as homeActions from '../actions/home-actions';
 
 import {
@@ -32,11 +34,13 @@ class Index extends Component {
 
   handleWordInput(text){
     let { receiveWordInput } = this.props;
-
-    //let text = event.nativeEvent.text
-    console.log('/////////////////////////////', this.props);
     receiveWordInput(text);
   }
+
+  handleSubmit(){
+
+  }
+
   render() {
     let { homePage } = this.props;
     return (
@@ -50,6 +54,7 @@ class Index extends Component {
             value={homePage.word}
             onChangeText= {this.handleWordInput.bind(this) }
           />
+          <Button text='Define' whenTapped={this.handleSubmit.bind(this)}/>
         </View>
     );
   }
