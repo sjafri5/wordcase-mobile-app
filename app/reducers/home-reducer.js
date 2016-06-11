@@ -4,8 +4,13 @@ const initialState = {
   word: ''
 }
 
-export default function home(state = initialState, action = {}) {
+export default function homePage(state = initialState, action = {}) {
   switch (action.type) {
+    case types.RECEIVE_WORD_INPUT:
+      console.log('3', );
+      return Object.assign({}, state, {
+        word: action.text,
+      })
     default:
       return state;
   }
