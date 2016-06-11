@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect  } from 'react-redux';
 
 import Styles from './../stylesheets/home-styles';
@@ -13,26 +12,33 @@ import {
 
 const mapStateToProps = (state) => {
   return {
-    //login: state.login,
+    homePage: state.homePage
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveWordInput: (text)=>{
+      console.log('1', );
       dispatch(homeActions.receiveWordInput(text))
-    },
+    }
   }
 }
 
 class Index extends Component {
-  handleWordInput(event){
+  constructor(props) {
+    super(props);
+  }
+
+  handleWordInput(text){
     let { receiveWordInput } = this.props;
-    let text = event.nativeEvent.text
+
+    //let text = event.nativeEvent.text
+    console.log('/////////////////////////////', this.props);
     receiveWordInput(text);
   }
   render() {
-    console.log('here????????', );
+    let { homePage } = this.props;
     return (
         <View>
           <Text>
@@ -41,8 +47,8 @@ class Index extends Component {
           <TextInput
             style={Styles.numericInputField}
             placeholder={'enter word'}
-            value={''}
-            onChange= {this.handleChangeEvent}
+            value={homePage.word}
+            onChangeText= {this.handleWordInput.bind(this) }
           />
         </View>
     );
