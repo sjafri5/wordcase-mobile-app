@@ -4,6 +4,8 @@ import { connect  } from 'react-redux';
 import Styles from './../stylesheets/home-styles';
 import Button from './../components/button';
 
+import Api from './../utils/api';
+
 import * as homeActions from '../actions/home-actions';
 
 import {
@@ -21,7 +23,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveWordInput: (text)=>{
-      console.log('1', );
       dispatch(homeActions.receiveWordInput(text))
     }
   }
@@ -38,7 +39,8 @@ class Index extends Component {
   }
 
   handleSubmit(){
-
+    let { homePage } = this.props;
+    Api.getDefinition(homePage.word)
   }
 
   render() {
