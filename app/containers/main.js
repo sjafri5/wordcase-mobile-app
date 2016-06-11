@@ -10,12 +10,6 @@ const store = createStoreWithMiddleware(reducer);
 
 
 class Wordcase extends Component {
-  handleWordInput(event){
-    let { receiveWordInput } = this.props;
-    let text = event.nativeEvent.text
-    receiveWordInput(text);
-
-  }
   render() {
     return (
       <Provider store={store}>
