@@ -13,11 +13,10 @@ class Router extends Component {
     }
   }
   render() {
-    console.log('HERE>', );
     return (
       <Navigator
         debugOverlay={false}
-        renderScene={this.renderScene}
+        renderScene={ this.renderScene.bind(this) }
         initialRoute={{name: 'Index'}}
       />
     );
