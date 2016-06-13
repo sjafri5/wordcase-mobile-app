@@ -6,3 +6,9 @@ export function receiveWordInput(text) {
     text
   };
 };
+
+export function submitWord() {
+  return {
+    type: types.SUBMIT_WORD
+  };
+};
