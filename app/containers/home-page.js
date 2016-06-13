@@ -40,7 +40,9 @@ class Index extends Component {
 
   handleSubmit(){
     let { homePage } = this.props;
-    Api.getDefinition(homePage.word)
+    Api.getDefinition(homePage.word).then((response)=>{
+      console.log(response)
+    })
   }
 
   render() {
