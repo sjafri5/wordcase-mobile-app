@@ -12,3 +12,16 @@ export function submitWord() {
     type: types.SUBMIT_WORD
   };
 };
+
+export function fetchDefinition() {
+  return {
+    type: types.FETCH_DEFINITION
+  };
+};
+
+export function receiveDefinition(definition) {
+  return {
+    type: types.RECEIVE_DEFINITION,
+    definition
+  };
+};
