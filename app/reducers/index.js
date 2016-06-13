@@ -1,3 +1,3 @@
-import homePage from './home-reducer';
+import homePage from './home-page';
 
 export {homePage};
