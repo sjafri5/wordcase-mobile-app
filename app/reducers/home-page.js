@@ -16,7 +16,16 @@ export default function homePage(state = initialState, action = {}) {
       })
     case types.SUBMIT_WORD:
       return Object.assign({}, state, {
-        submitted: true,
+        submitted: true
+      })
+    case types.FETCH_DEFINITION:
+      return Object.assign({}, state, {
+        fetching: true
+      })
+    case types.RECEIVE_DEFINITION:
+      return Object.assign({}, state, {
+        definition: action.definition,
+        fetching: false
       })
     default:
       return state;
