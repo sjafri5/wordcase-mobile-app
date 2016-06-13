@@ -1,5 +1,5 @@
 import expect from 'expect'
-import reducer from '../../app/reducers/home-reducer'
+import reducer from '../../app/reducers/home-page'
 import * as types from '../../app/actions/action-types'
 
 describe('HomePage', () => {
