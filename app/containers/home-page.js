@@ -24,6 +24,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     receiveWordInput: (text)=>{
       dispatch(homeActions.receiveWordInput(text))
+    },
+    submitWord: ()=>{
+      dispatch(homeActions.submitWord())
+    },
+    fetchDefinition: ()=>{
+      dispatch(homeActions.fetchDefinition())
+    },
+    receiveDefinition: (definition)=>{
+      dispatch(homeActions.receiveDefinition(definition))
     }
   }
 }
@@ -39,10 +48,32 @@ class Index extends Component {
   }
 
   handleSubmit(){
-    let { homePage } = this.props;
+    let { homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
+
+    submitWord();
+    fetchDefinition();
     Api.getDefinition(homePage.word).then((response)=>{
-      console.log(response)
+      let definition = response.results[0].definition
+      receiveDefinition(definition);
     })
+  }
+
+  _renderDefinition() {
+    let { submitted, word, definition } = this.props.homePage;
+    if (submitted) {
+      return (
+        <View>
+          <Text>
+            {word}:
+          </Text>
+          <View>
+            <Text>
+              {definition}
+            </Text>
+          </View>
+        </View>
+      )
+    }
   }
 
   render() {
@@ -59,6 +90,7 @@ class Index extends Component {
             onChangeText= {this.handleWordInput.bind(this) }
           />
           <Button text='Define' whenTapped={this.handleSubmit.bind(this)}/>
+          {this._renderDefinition()}
         </View>
     );
   }
