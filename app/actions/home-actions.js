@@ -19,9 +19,9 @@ export function fetchDefinition() {
   };
 };
 
-export function receiveDefinition(definition) {
+export function receiveDefinition(definitions) {
   return {
     type: types.RECEIVE_DEFINITION,
-    definition
+    definitions
   };
 };

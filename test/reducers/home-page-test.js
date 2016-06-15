@@ -1,25 +1,36 @@
 import expect from 'expect'
 import reducer from '../../app/reducers/home-page'
 import * as types from '../../app/actions/action-types'
+import definitions from '../fixtures/definitions'
 
 describe('HomePage', () => {
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(
           {
-            word: '',
+            wordInputField: '',
             submitted: false,
+            submittedWord: '',
             fetching: false,
             error: false,
-            definition: ''
+            definitions: []
           }
       )
   })
 
   it('handles SUBMIT_WORD', () => {
-    expect(reducer(undefined, {type: types.SUBMIT_WORD})).toEqual(
+    let initialState = {
+      wordInputField: 'bobby',
+      definitions: [],
+      submittedWord: '',
+      submitted: true,
+      fetching: false,
+      error: false
+    }
+    expect(reducer(initialState, {type: types.SUBMIT_WORD})).toEqual(
           {
-            word: '',
-            definition: '',
+            wordInputField: '',
+            submittedWord: '',
+            definitions: [],
             submitted: true,
             fetching: false,
             error: false
@@ -30,8 +41,9 @@ describe('HomePage', () => {
   it('handles FETCH_DEFINITION', () => {
     expect(reducer(undefined, {type: types.FETCH_DEFINITION})).toEqual(
           {
-            word: '',
-            definition: '',
+            wordInputField: '',
+            submittedWord: '',
+            definitions: [],
             submitted: false,
             fetching: true,
             error: false
@@ -42,11 +54,12 @@ describe('HomePage', () => {
   it('handles RECEIVE_DEFINITION', () => {
     let action = {
       type: types.RECEIVE_DEFINITION,
-      definition: 'this is a definition'
+      definitions: definitions
     }
     let initialState = {
-      word: 'bobby',
-      definition: '',
+      wordInputField: 'bobby',
+      submittedWord: '',
+      definitions: [],
       submitted: true,
       fetching: true,
       error: false
@@ -54,8 +67,9 @@ describe('HomePage', () => {
 
     expect(reducer(initialState, action)).toEqual(
         {
-          word: 'bobby',
-          definition: action.definition,
+          wordInputField: 'bobby',
+          submittedWord: definitions.word,
+          definitions: definitions.results,
           submitted: true,
           fetching: false,
           error: false
