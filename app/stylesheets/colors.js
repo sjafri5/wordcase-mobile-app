@@ -12,7 +12,8 @@ var Colors = {
   alertPink: '#f7dcdf',
   alertRed: '#9c4647',
   white: '#fff',
-  gray31: '#404f4f'
+  gray31: '#404f4f',
+  black: 'black'
 }
 
 module.exports = Colors;
