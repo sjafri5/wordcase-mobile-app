@@ -1,21 +1,23 @@
 import * as types from '../actions/action-types';
 
 const initialState = {
-  word: '',
+  wordInputField: '',
+  submittedWord: '',
   submitted: false,
   fetching: false,
   error: false,
-  definition: ''
+  definitions: []
 }
 
 export default function homePage(state = initialState, action = {}) {
   switch (action.type) {
     case types.RECEIVE_WORD_INPUT:
       return Object.assign({}, state, {
-        word: action.text,
+        wordInputField: action.text,
       })
     case types.SUBMIT_WORD:
       return Object.assign({}, state, {
+        wordInputField: '',
         submitted: true
       })
     case types.FETCH_DEFINITION:
@@ -24,7 +26,8 @@ export default function homePage(state = initialState, action = {}) {
       })
     case types.RECEIVE_DEFINITION:
       return Object.assign({}, state, {
-        definition: action.definition,
+        definitions: action.definitions.results,
+        submittedWord: action.definitions.word,
         fetching: false
       })
     default:
