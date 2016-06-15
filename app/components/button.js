@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react';
 import Styles from '../stylesheets/button-styles'
-//import styles from '../stylesheets/styles';
-//import Colors from '../stylesheets/colors';
 
 import {
   Text,

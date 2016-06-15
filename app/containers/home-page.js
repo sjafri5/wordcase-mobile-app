@@ -3,6 +3,8 @@ import { connect  } from 'react-redux';
 
 import Styles from './../stylesheets/home-styles';
 import Button from './../components/button';
+import ProgressBar from 'ProgressBarAndroid';
+import _ from 'underscore';
 
 import Api from './../utils/api';
 
@@ -11,7 +13,8 @@ import * as homeActions from '../actions/home-actions';
 import {
   Text,
   TextInput,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 const mapStateToProps = (state) => {
@@ -31,8 +34,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchDefinition: ()=>{
       dispatch(homeActions.fetchDefinition())
     },
-    receiveDefinition: (definition)=>{
-      dispatch(homeActions.receiveDefinition(definition))
+    receiveDefinition: (definitions)=>{
+      dispatch(homeActions.receiveDefinition(definitions))
     }
   }
 }
@@ -48,49 +51,85 @@ class Index extends Component {
   }
 
   handleSubmit(){
-    let { homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
+    let { clearTextField, homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
 
     submitWord();
     fetchDefinition();
-    Api.getDefinition(homePage.word).then((response)=>{
-      let definition = response.results[0].definition
-      receiveDefinition(definition);
+    Api.getDefinition(homePage.wordInputField).then((response)=>{
+      receiveDefinition(response);
     })
   }
 
-  _renderDefinition() {
-    let { submitted, word, definition } = this.props.homePage;
-    if (submitted) {
+  _renderDefinitions() {
+    let { fetching, submitted, submittedWord, definitions } = this.props.homePage;
+    if (fetching){
       return (
-        <View>
-          <Text>
-            {word}:
+        <View style={Styles.definitionsContainer}>
+          <ProgressBar />
+        </View>
+      );
+    }
+    else if (submitted) {
+      return (
+        <ScrollView style={Styles.definitionsContainer}>
+          <Text style={Styles.submittedWord}>
+            {submittedWord}:
           </Text>
           <View>
-            <Text>
-              {definition}
-            </Text>
+            {this._renderDefinition()}
           </View>
-        </View>
+        </ScrollView>
       )
+    }
+  }
+  
+  _renderDefinition(){
+    let { definitions } = this.props.homePage
+    return _.map(definitions, (definition) => {
+      return (
+        <View style={Styles.definitionContainer}>
+          <Text style={Styles.definitionText}>
+            -- {definition.definition}
+          </Text>
+          
+          <Text style={Styles.definitionText}>
+            Synonyms: {this._renderSynonyms(definition)}
+          </Text>
+        </View>
+      );
+    });
+  };
+
+  _renderSynonyms(definition){
+    if (definition.synonyms) {
+      return _.map(definition.synonyms, (synonym) => {
+        return (
+          <Text style={Styles.definitionText}>
+            { synonym + ", " }
+          </Text>
+        )
+      })
     }
   }
 
   render() {
     let { homePage } = this.props;
     return (
-        <View>
-          <Text>
-            Welcome to WordCase
-          </Text>
-          <TextInput
-            style={Styles.numericInputField}
-            placeholder={'enter word'}
-            value={homePage.word}
-            onChangeText= {this.handleWordInput.bind(this) }
-          />
+        <View style={Styles.container}>
+          <View style={Styles.inputContainer}>
+            <Text style={Styles.header}>
+              Lookup a word:
+            </Text>
+            <TextInput
+              style={Styles.numericInputField}
+              placeholder={'e.g. cacophony'}
+              value={homePage.word}
+              onChangeText= {this.handleWordInput.bind(this) }
+            />
+          </View>
+
           <Button text='Define' whenTapped={this.handleSubmit.bind(this)}/>
-          {this._renderDefinition()}
+          {this._renderDefinitions()}
         </View>
     );
   }
