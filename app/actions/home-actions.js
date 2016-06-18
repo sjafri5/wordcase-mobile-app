@@ -25,3 +25,10 @@ export function receiveDefinition(definitions) {
     definitions
   };
 };
+
+export function actionAlert(message) {
+  return {
+    type: types.ACTION_ALERT,
+    message 
+  };
+};
