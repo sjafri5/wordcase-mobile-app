@@ -25,7 +25,9 @@ var Styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   submittedWord: {
+    marginTop: 10,
     marginBottom: 10,
+    marginLeft: 15,
     color: Colors.black,
     fontSize: 25,
     fontFamily: 'Roboto Bold',
@@ -36,6 +38,10 @@ var Styles = StyleSheet.create({
     color: Colors.black,
     fontSize: 15,
     fontFamily: 'Roboto Bold',
+  },
+  wordBox: {
+    borderRadius: 5,
+    backgroundColor: '#853962',
   },
   definitionsContainer: {
     marginTop: 20,

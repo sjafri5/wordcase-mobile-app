@@ -72,11 +72,13 @@ class Index extends Component {
     else if (submitted) {
       return (
         <ScrollView style={Styles.definitionsContainer}>
-          <Text style={Styles.submittedWord}>
-            {submittedWord}:
-          </Text>
-          <View>
-            {this._renderDefinition()}
+          <View style={Styles.wordBox}>
+            <Text style={Styles.submittedWord}>
+              {submittedWord}:
+            </Text>
+            <View>
+              {this._renderDefinition()}
+            </View>
           </View>
         </ScrollView>
       )
@@ -85,16 +87,15 @@ class Index extends Component {
   
   _renderDefinition(){
     let { definitions } = this.props.homePage
-    return _.map(definitions, (definition) => {
+
+    return _.map(definitions.slice(0,2), (definition) => {
       return (
         <View style={Styles.definitionContainer}>
           <Text style={Styles.definitionText}>
             -- {definition.definition}
           </Text>
           
-          <Text style={Styles.definitionText}>
-            Synonyms: {this._renderSynonyms(definition)}
-          </Text>
+          {this._renderSynonyms(definition)}
         </View>
       );
     });
@@ -102,13 +103,11 @@ class Index extends Component {
 
   _renderSynonyms(definition){
     if (definition.synonyms) {
-      return _.map(definition.synonyms, (synonym) => {
-        return (
-          <Text style={Styles.definitionText}>
-            { synonym + ", " }
-          </Text>
-        )
-      })
+      return (
+        <Text style={Styles.definitionText}>
+          Synonyms: {definition.synonyms.join(", ")}
+        </Text>
+      )
     }
   }
 
