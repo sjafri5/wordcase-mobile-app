@@ -9,8 +9,8 @@ import {
 
 var Styles = StyleSheet.create({
   submitButton: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 15,
+    marginRight: 15,
     backgroundColor: Colors.buttonBlue,
     borderRadius: 2,
     height:50,

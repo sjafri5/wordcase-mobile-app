@@ -54,6 +54,20 @@ var Styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
+  dualButtonContainer: {
+    marginTop: 15,
+    marginBottom: 15,
+    flex: 1,
+    flexDirection: 'row'
+  },
+  firstBtnContainer: {
+    flex: 0.5,
+    alignSelf: 'flex-start'
+  },
+  secondBtnContainer: {
+    flex: 0.5,
+    alignSelf: 'flex-end'
+  },
 })
 
 module.exports = Styles;
