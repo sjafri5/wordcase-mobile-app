@@ -30,6 +30,15 @@ export default function homePage(state = initialState, action = {}) {
         submittedWord: action.definitions.word,
         fetching: false
       })
+    case types.RESET_WORD_BOX:
+      return Object.assign({}, state, {
+        wordInputField: '',
+        submittedWord: '',
+        submitted: false,
+        fetching: false,
+        error: false,
+        definitions: []
+      })
     default:
       return state;
   }

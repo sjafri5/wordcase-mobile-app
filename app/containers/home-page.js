@@ -9,6 +9,7 @@ import _ from 'underscore';
 import Api from './../utils/api';
 
 import * as homeActions from '../actions/home-actions';
+import * as wordActions from '../actions/word-actions';
 
 import {
   Text,
@@ -36,6 +37,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     receiveDefinition: (definitions)=>{
       dispatch(homeActions.receiveDefinition(definitions))
+    },
+    actionAlert: (message)=>{
+      dispatch(homePageActions.actionAlert(message)
+    },
+    resetWordBox: ()=>{
+      dispatch(wordActions.resetWordBox())
     }
   }
 }
@@ -102,9 +109,16 @@ class Index extends Component {
   }
 
   handleKeep(){
+    let { resetWordBox } = this.props;
+    Async.cacheWord();
+    resetWordBox()
+    ActionAlert('Word Stored');
   }
 
   handleDiscard(){
+    let { resetWordBox } = this.props;
+    resetWordBox()
+    ActionAlert('Word Deleted');
   }
 
   _renderDefinition(){
