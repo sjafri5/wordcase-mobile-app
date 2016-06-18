@@ -80,11 +80,33 @@ class Index extends Component {
               {this._renderDefinition()}
             </View>
           </View>
+          <View>
+            {this._renderButtons()}
+          </View>
         </ScrollView>
       )
     }
   }
   
+  _renderButtons(){
+    return (
+      <View style={Styles.dualButtonContainer}>
+        <View style={Styles.firstBtnContainer}>
+          <Button text='Discard' whenTapped={this.handleDiscard.bind(this)}/>
+        </View>
+        <View style={Styles.secondBtnContainer}>
+          <Button text='Keep' whenTapped={this.handleKeep.bind(this)}/>
+        </View>
+      </View>
+    )
+  }
+
+  handleKeep(){
+  }
+
+  handleDiscard(){
+  }
+
   _renderDefinition(){
     let { definitions } = this.props.homePage
 
