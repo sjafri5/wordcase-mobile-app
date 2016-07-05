@@ -7,6 +7,7 @@ import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
 
 import Api from './../utils/api';
+import Async from './../utils/async';
 
 import * as homeActions from '../actions/home-actions';
 import * as wordActions from '../actions/word-actions';

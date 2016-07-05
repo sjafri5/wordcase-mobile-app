@@ -10,6 +10,10 @@ const store = createStoreWithMiddleware(reducer);
 
 
 class Wordcase extends Component {
+  componentWillMount(){
+    Async.createWordList();
+  };
+
   render() {
     return (
       <Provider store={store}>
