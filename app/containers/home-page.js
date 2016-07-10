@@ -3,6 +3,8 @@ import { connect  } from 'react-redux';
 
 import Styles from './../stylesheets/home-styles';
 import Button from './../components/button';
+import NavBar from './../containers/nav-bar';
+
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
 
@@ -156,6 +158,7 @@ class Index extends Component {
     let { homePage } = this.props;
     return (
         <View style={Styles.container}>
+          <NavBar />
           <View style={Styles.inputContainer}>
             <Text style={Styles.header}>
               Lookup a word:
