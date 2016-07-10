@@ -7,8 +7,10 @@ var Async = {
         AsyncStorage.setItem('wordList', JSON.stringify({}))
       }
     })
-  }
+  },
   cacheWord(word) {
    return AsyncStorage.mergeItem('wordList', JSON.stringify(word))
   }
 }
+
+module.exports = Async;

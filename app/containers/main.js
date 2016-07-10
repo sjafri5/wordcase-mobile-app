@@ -8,6 +8,7 @@ import * as reducers from '../reducers/index';
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
+import Async from './../utils/async';
 
 class Wordcase extends Component {
   componentWillMount(){

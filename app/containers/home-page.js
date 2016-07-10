@@ -16,6 +16,8 @@ import {
   Text,
   TextInput,
   View,
+  AsyncStorage,
+  ActionAlert,
   ScrollView
 } from 'react-native';
 
@@ -40,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(homeActions.receiveDefinition(definitions))
     },
     actionAlert: (message)=>{
-      dispatch(homePageActions.actionAlert(message)
+      dispatch(homeActions.actionAlert(message))
     },
     resetWordBox: ()=>{
       dispatch(wordActions.resetWordBox())
@@ -110,16 +112,18 @@ class Index extends Component {
   }
 
   handleKeep(){
-    let { resetWordBox } = this.props;
-    Async.cacheWord();
+    let { homePage, resetWordBox, actionAlert } = this.props;
+    let word = {}
+    word[homePage.submittedWord] = homePage.definitions.slice(0,2);
+    Async.cacheWord(word);
     resetWordBox()
-    ActionAlert('Word Stored');
+    actionAlert('Word Stored');
   }
 
   handleDiscard(){
-    let { resetWordBox } = this.props;
+    let { resetWordBox, actionAlert} = this.props;
     resetWordBox()
-    ActionAlert('Word Deleted');
+    actionAlert('Word Deleted');
   }
 
   _renderDefinition(){
