@@ -1,13 +1,13 @@
 'use strict';
 
-import React from 'react-native';
+import React, { Component } from 'react';
 import Styles from './../stylesheets/nav-bar-styles';
 
 var {
     Text,
     View,
     TouchableHighlight
-} = React;
+} = 'react-native'
 
 var NavBarButton = React.createClass({
   render: function() {

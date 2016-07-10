@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react-native';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect  } from 'react-redux';
 import _ from 'underscore';
@@ -14,7 +14,8 @@ import NavBarButton from '../components/nav-bar-button';
 import * as navBarActions from '../actions/nav-bar-actions';
 
 import TimerMixin from 'react-timer-mixin';
-const {
+
+import {
     View,
     Text,
     Image,
@@ -23,7 +24,7 @@ const {
     TouchableWithoutFeedback,
     LayoutAnimation,
     UIManager
-} = React;
+} from 'react-native'
 
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
@@ -54,50 +55,21 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-var NavBar= React.createClass({
-  mixins: [TimerMixin],
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+  }
+  mixins: [TimerMixin]
+
   componentWillMount() {
     LayoutAnimation.spring();
-  },
-  handleMenuTap: function(){
+  }
+  handleMenuTap(){
     let { tapMenuIcon } = this.props;
     LayoutAnimation.spring();
     tapMenuIcon();
-  },
-  handleLogout: function(){
-    let { navigator, closeMenu } = this.props;
-
-    Async.signOut().then(function(res){
-      navigator.resetTo({
-        name: 'Login'
-      })
-    });
-    closeMenu();
-  },
-  handleSalesSummary: function(){
-    let { navigator, closeMenu } = this.props;
-    let routes = navigator.getCurrentRoutes();
-    if (!(_.last(routes).name == 'SalesSummary')) {
-      closeMenu();
-      this.pushStack('SalesSummary');
-    }
-    else {
-      closeMenu();
-    }
-  },
-  handleRefresh: function(){
-    let { navigator, currentUser, receiveCurrentUser, closeMenu } = this.props;
-
-    Api.currentUser(currentUser.accessToken).then(function(res){
-      receiveCurrentUser(res.current_user);
-      Async.cacheCurrentUser(res.current_user, currentUser.date)
-      closeMenu();
-    }).catch(function(err){
-      console.log('Splash Error', err);
-      //receiveCurrentUserError(err.message);
-    });
-  },
-  handleClientDirectory: function(){
+  }
+  handleClientDirectory(){
     let { navigator, closeMenu } = this.props;
 
     let routes = navigator.getCurrentRoutes();
@@ -108,8 +80,8 @@ var NavBar= React.createClass({
     else {
       closeMenu();
     }
-  },
-  pushStack: function(stackName){
+  }
+  pushStack(stackName){
     let { navigator } = this.props;
 
     this.requestAnimationFrame(() => {
@@ -117,26 +89,8 @@ var NavBar= React.createClass({
         name: stackName
       })
     });
-  },
-  handleTransactions: function(){
-    let { navigator, closeMenu, tapMenuIcon, resetCustomerForm, resetCurrentSale } = this.props;
-    let routes = navigator.getCurrentRoutes();
-
-    if ((_.last(routes).name == 'SalesPage') || (_.last(routes).name == 'EditSalesPage')) {
-      closeMenu();
-      resetCustomerForm();
-      resetCurrentSale();
-      this.pushStack('TransactionsIndex');
-    }
-    else if (!(_.last(routes).name == 'TransactionsIndex')) {
-      closeMenu();
-      this.pushStack('TransactionsIndex');
-    }
-    else {
-      closeMenu();
-    }
-  },
-  renderButtons: function(){
+  }
+  renderButtons(){
     return <View>
       <TouchableHighlight
         onPress={this.handleTransactions}
@@ -160,8 +114,8 @@ var NavBar= React.createClass({
         </View>
       </TouchableHighlight>
     </View>
-  },
-  render: function(){
+  }
+  render(){
     let { navBar } = this.props;
     return (
       <View>
@@ -188,7 +142,7 @@ var NavBar= React.createClass({
       </View>
     )
   }
-});
+}
 
 module.exports = connect(
                    mapStateToProps,
