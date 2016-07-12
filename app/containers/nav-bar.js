@@ -41,6 +41,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(currentUserActions.receiveCurrentUser(currentUser))
     },
     tapMenuIcon: ()=>{
+      console.log('1');
       dispatch(navBarActions.tapMenuIcon())
     },
     closeMenu: ()=>{
@@ -65,6 +66,7 @@ class NavBar extends Component {
     LayoutAnimation.spring();
   }
   handleMenuTap(){
+    console.log('0', this.props);
     let { tapMenuIcon } = this.props;
     LayoutAnimation.spring();
     tapMenuIcon();
@@ -127,7 +129,7 @@ class NavBar extends Component {
           </View>
           <View style={Styles.menuIconButton}>
             <TouchableWithoutFeedback
-              onPress={ this.handleMenuTap }
+              onPress={ this.handleMenuTap.bind(this) }
             >
               <Image 
                 style={Styles.menuIconImage}

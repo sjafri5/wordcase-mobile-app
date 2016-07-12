@@ -9,8 +9,8 @@ var {
     TouchableHighlight
 } = 'react-native'
 
-var NavBarButton = React.createClass({
-  render: function() {
+class NavBarButton extends Component {
+  render() {
     let { name } = this.props;
     return <View>
        <Text multiline={true} allowFontScaling={true} style={Styles.panelText}>
@@ -18,6 +18,6 @@ var NavBarButton = React.createClass({
        </Text>
      </View>;
   }
-});
+}
 
 module.exports = NavBarButton;
