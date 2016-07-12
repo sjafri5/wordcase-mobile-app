@@ -3,20 +3,23 @@
 import React, { Component } from 'react';
 import Styles from './../stylesheets/nav-bar-styles';
 
-var {
+import {
     Text,
     View,
     TouchableHighlight
-} = 'react-native'
+} from 'react-native'
 
 class NavBarButton extends Component {
   render() {
+    console.log('name', this.props);
     let { name } = this.props;
-    return <View>
+    return (
+      <View>
        <Text multiline={true} allowFontScaling={true} style={Styles.panelText}>
          {name}
        </Text>
-     </View>;
+     </View>
+    )
   }
 }
 
