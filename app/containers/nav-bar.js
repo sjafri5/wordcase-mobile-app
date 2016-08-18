@@ -41,7 +41,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(currentUserActions.receiveCurrentUser(currentUser))
     },
     tapMenuIcon: ()=>{
-      console.log('1');
       dispatch(navBarActions.tapMenuIcon())
     },
     closeMenu: ()=>{
@@ -66,18 +65,17 @@ class NavBar extends Component {
     LayoutAnimation.spring();
   }
   handleMenuTap(){
-    console.log('0', this.props);
     let { tapMenuIcon } = this.props;
     LayoutAnimation.spring();
     tapMenuIcon();
   }
-  handleClientDirectory(){
+  handleWordList(){
     let { navigator, closeMenu } = this.props;
 
     let routes = navigator.getCurrentRoutes();
-    if (!(_.last(routes).name == 'ClientDirectory')) {
+    if (!(_.last(routes).name == 'WordList')) {
       closeMenu();
-      this.pushStack('ClientDirectory');
+      this.pushStack('WordList')
     }
     else {
       closeMenu();
@@ -86,30 +84,28 @@ class NavBar extends Component {
   pushStack(stackName){
     let { navigator } = this.props;
 
-    this.requestAnimationFrame(() => {
-      navigator.push({
-        name: stackName
-      })
+    navigator.push({
+      name: stackName
     });
   }
   renderButtons(){
     return <View>
       <TouchableHighlight
-        onPress={this.handleTransactions}
+        onPress={this.handleHome}
         style= {Styles.navBarPanel}>
         <View>
         <NavBarButton name={'Home'}/>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={this.handleRefresh}
+        onPress={this.handleWordList.bind(this)}
         style= {Styles.navBarPanel}>
         <View>
         <NavBarButton name={'Word List'}/>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={this.handleLogout}
+        onPress={this.handleQuiz}
         style= {Styles.navBarPanel}>
         <View>
           <NavBarButton name={'Quiz'}/>

@@ -11,7 +11,6 @@ import {
 
 class NavBarButton extends Component {
   render() {
-    console.log('name', this.props);
     let { name } = this.props;
     return (
       <View>

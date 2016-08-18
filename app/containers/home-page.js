@@ -155,10 +155,10 @@ class Index extends Component {
   }
 
   render() {
-    let { homePage } = this.props;
+    let { homePage, navigator } = this.props;
     return (
         <View style={Styles.container}>
-          <NavBar />
+          <NavBar navigator={ navigator } />
           <View style={Styles.inputContainer}>
             <Text style={Styles.header}>
               Lookup a word:
