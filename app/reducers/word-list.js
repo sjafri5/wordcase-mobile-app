@@ -4,7 +4,7 @@ const initialState = [];
 
 export default function wordList(state = initialState, action = {}) {
   switch (action.type) {
-    case types.RECEIVE_WORD_INPUT:
+    case types.INITIALIZE_WORD_LIST:
       return Object.assign({}, state, {
       })
     default:

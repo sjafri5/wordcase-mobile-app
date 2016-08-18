@@ -8,6 +8,8 @@ import _ from 'underscore';
 import NavBar from './../containers/nav-bar';
 import Styles from './../stylesheets/word-list-styles';
 
+import Async from '../utils/async';
+
 import {
     View,
     Text,
@@ -30,8 +32,15 @@ class WordList extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentWillMount(){
+    Async.fetchWordList().then((wordList)=>{
+      console.log('weodafasfsdfa', wordList);
+    })
+  }
   
   renderWords(){
+
   }
 
   render(){
