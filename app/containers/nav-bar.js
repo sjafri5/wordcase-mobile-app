@@ -6,9 +6,8 @@ import { connect  } from 'react-redux';
 import _ from 'underscore';
 
 import Styles from '../stylesheets/nav-bar-styles';
-import Api from '../utils/api'
-import Async from '../utils/async';
 
+import { Api, Async } from '../utils/require-utils';
 import { NavBarButton } from '../components/require-components';
 
 import * as navBarActions from '../actions/nav-bar-actions';
