@@ -5,6 +5,7 @@ import {
 
 import HomePage from '../containers/home-page';
 import WordList from '../containers/word-list';
+import Test from '../containers/test';
 
 class Router extends Component {
   renderScene(route, navigator){
@@ -13,6 +14,8 @@ class Router extends Component {
       return <HomePage navigator={ navigator } />;
     case 'WordList':
       return <WordList navigator={ navigator } />;
+    case 'Test':
+      return <Test navigator={ navigator } />;
     }
   }
   render() {

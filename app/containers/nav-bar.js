@@ -99,6 +99,19 @@ class NavBar extends Component {
     }
   }
 
+  handleTest(){
+    let { navigator, closeMenu } = this.props;
+
+    let routes = navigator.getCurrentRoutes();
+    if (!(_.last(routes).name == 'Test')) {
+      closeMenu();
+      this.pushStack('Test')
+    }
+    else {
+      closeMenu();
+    }
+  }
+
   pushStack(stackName){
     let { navigator } = this.props;
 
@@ -110,24 +123,24 @@ class NavBar extends Component {
   renderButtons(){
     return <View>
       <TouchableHighlight
-        onPress={this.handleHome.bind(this)}
+        onPress={ this.handleHome.bind(this) }
         style= {Styles.navBarPanel}>
         <View>
         <NavBarButton name={'Home'}/>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={this.handleWordList.bind(this)}
+        onPress={ this.handleWordList.bind(this) }
         style= {Styles.navBarPanel}>
         <View>
         <NavBarButton name={'Word List'}/>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={this.handleQuiz}
+        onPress={ this.handleTest.bind(this) }
         style= {Styles.navBarPanel}>
         <View>
-          <NavBarButton name={'Quiz'}/>
+          <NavBarButton name={'Test'}/>
         </View>
       </TouchableHighlight>
     </View>
