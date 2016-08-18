@@ -30,6 +30,10 @@ class WordList extends Component {
   constructor(props) {
     super(props);
   }
+  
+  renderWords(){
+  }
+
   render(){
     let { navigator } = this.props;
 
@@ -37,8 +41,11 @@ class WordList extends Component {
       <View style={Styles.container}>
         <NavBar navigator={ navigator } />
         <Text>
-          this is the word list 
+          Your Words:
         </Text>
+        <View>
+          { this.renderWords() }
+        </View>
       </View>
     )
   }

@@ -3,5 +3,6 @@ import navBar from './nav-bar';
 
 export {
   homePage,
+  wordList,
   navBar
 };
