@@ -3,9 +3,7 @@ import {
   Navigator
 } from 'react-native';
 
-import HomePage from '../containers/home-page';
-import WordList from '../containers/word-list';
-import Test from '../containers/test';
+import { HomePage, WordList, Test } from '../containers/require-containers'
 
 class Router extends Component {
   renderScene(route, navigator){
