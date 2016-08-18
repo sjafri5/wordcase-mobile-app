@@ -64,11 +64,13 @@ class NavBar extends Component {
   componentWillMount() {
     LayoutAnimation.spring();
   }
+
   handleMenuTap(){
     let { tapMenuIcon } = this.props;
     LayoutAnimation.spring();
     tapMenuIcon();
   }
+
   handleWordList(){
     let { navigator, closeMenu } = this.props;
 
@@ -81,6 +83,22 @@ class NavBar extends Component {
       closeMenu();
     }
   }
+
+  handleHome(){
+    let { navigator, closeMenu } = this.props;
+
+    let routes = navigator.getCurrentRoutes();
+    if (!(_.last(routes).name == 'HomePage')) {
+      closeMenu();
+      navigator.resetTo({
+        name: 'HomePage'
+      });
+    }
+    else {
+      closeMenu();
+    }
+  }
+
   pushStack(stackName){
     let { navigator } = this.props;
 
@@ -88,10 +106,11 @@ class NavBar extends Component {
       name: stackName
     });
   }
+
   renderButtons(){
     return <View>
       <TouchableHighlight
-        onPress={this.handleHome}
+        onPress={this.handleHome.bind(this)}
         style= {Styles.navBarPanel}>
         <View>
         <NavBarButton name={'Home'}/>
