@@ -4,12 +4,15 @@ import {
 } from 'react-native';
 
 import HomePage from '../containers/home-page';
+import WordList from '../containers/word-list';
 
 class Router extends Component {
-  renderScene(route, nav){
+  renderScene(route, navigator){
     switch (route.name) {
-    case 'Index':
-      return <HomePage />;
+    case 'HomePage':
+      return <HomePage navigator={ navigator } />;
+    case 'WordList':
+      return <WordList navigator={ navigator } />;
     }
   }
   render() {
@@ -17,7 +20,7 @@ class Router extends Component {
       <Navigator
         debugOverlay={false}
         renderScene={ this.renderScene.bind(this) }
-        initialRoute={{name: 'Index'}}
+        initialRoute={{name: 'HomePage'}}
       />
     );
   }
