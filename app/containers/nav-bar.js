@@ -9,7 +9,7 @@ import Styles from '../stylesheets/nav-bar-styles';
 import Api from '../utils/api'
 import Async from '../utils/async';
 
-import NavBarButton from '../components/nav-bar-button';
+import { NavBarButton } from '../components/require-components';
 
 import * as navBarActions from '../actions/nav-bar-actions';
 
