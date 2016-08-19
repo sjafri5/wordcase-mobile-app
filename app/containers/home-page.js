@@ -8,6 +8,7 @@ import { Api, Async } from '../utils/require-utils';
 import Styles from './../stylesheets/home-styles';
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
+var dismissKeyboard = require('dismissKeyboard');
 
 
 import * as homeActions from '../actions/home-actions';
@@ -61,6 +62,7 @@ class Index extends Component {
 
   handleSubmit(){
     let { clearTextField, homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
+    dismissKeyboard();
 
     submitWord();
     fetchDefinition();
