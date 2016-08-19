@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect  } from 'react-redux';
 
-import Styles from './../stylesheets/home-styles';
-import Button from './../components/button';
-import NavBar from './../containers/nav-bar';
+import { Button } from '../components/require-components';
+import { NavBar } from './require-containers';
+import { Api, Async } from '../utils/require-utils';
 
+import Styles from './../stylesheets/home-styles';
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
 
-import Api from './../utils/api';
-import Async from './../utils/async';
 
 import * as homeActions from '../actions/home-actions';
 import * as wordActions from '../actions/word-actions';
@@ -156,6 +155,7 @@ class Index extends Component {
 
   render() {
     let { homePage, navigator } = this.props;
+    console.log('homePage', homePage);
     return (
         <View style={Styles.container}>
           <NavBar navigator={ navigator } />
@@ -166,7 +166,7 @@ class Index extends Component {
             <TextInput
               style={Styles.numericInputField}
               placeholder={'e.g. cacophony'}
-              value={homePage.word}
+              value={homePage.wordInputField}
               onChangeText= {this.handleWordInput.bind(this) }
             />
           </View>

@@ -1,5 +1,5 @@
-import Button       from './home-page';
-import NavBarButton from './nav-bar';
+import Button       from './button';
+import NavBarButton from './nav-bar-button';
 
 export {
   NavBarButton,
