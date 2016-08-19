@@ -19,6 +19,7 @@ import {
   View,
   AsyncStorage,
   ActionAlert,
+  ToastAndroid,
   ScrollView
 } from 'react-native';
 
@@ -41,9 +42,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     receiveDefinition: (definitions)=>{
       dispatch(homeActions.receiveDefinition(definitions))
-    },
-    actionAlert: (message)=>{
-      dispatch(homeActions.actionAlert(message))
     },
     resetWordBox: ()=>{
       dispatch(wordActions.resetWordBox())
@@ -113,18 +111,21 @@ class Index extends Component {
   }
 
   handleKeep(){
-    let { homePage, resetWordBox, actionAlert } = this.props;
+    let { homePage, resetWordBox } = this.props;
     let word = {}
     word[homePage.submittedWord] = homePage.definitions.slice(0,2);
-    Async.cacheWord(word);
+    Async.cacheWord(word).then(()=>{
+      let message = `'${homePage.submittedWord}' has been successfully stored.`
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+    })
     resetWordBox()
-    actionAlert('Word Stored');
   }
 
   handleDiscard(){
-    let { resetWordBox, actionAlert} = this.props;
+    let { resetWordBox, homePage} = this.props;
     resetWordBox()
-    actionAlert('Word Deleted');
+    let message = `'${homePage.submittedWord}' has been discarded.`
+    ToastAndroid.show(message, ToastAndroid.SHORT)
   }
 
   _renderDefinition(){
@@ -155,7 +156,6 @@ class Index extends Component {
 
   render() {
     let { homePage, navigator } = this.props;
-    console.log('homePage', homePage);
     return (
         <View style={Styles.container}>
           <NavBar navigator={ navigator } />
