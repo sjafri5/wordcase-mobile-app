@@ -8,3 +8,4 @@ export const RESET_WORD_BOX= 'RESET_WORD_BOX';
 export const ACTION_ALERT= 'ACTION_ALERT';
 export const TAP_MENU_ICON= 'TAP_MENU_ICON';
 export const CLOSE_MENU= 'CLOSE_MENU';
+export const INITIALIZE_WORD_LIST= 'INITIALIZE_WORD_LIST';
