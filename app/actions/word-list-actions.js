@@ -6,3 +6,10 @@ export function initializeWordList(wordList) {
     wordList 
   };
 };
+
+export function displayWord(word) {
+  return {
+    type: types.DISPLAY_WORD,
+    word  
+  };
+};
