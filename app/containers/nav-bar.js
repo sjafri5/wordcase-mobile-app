@@ -13,6 +13,7 @@ import { NavBarButton } from '../components/require-components';
 import * as navBarActions from '../actions/nav-bar-actions';
 
 import TimerMixin from 'react-timer-mixin';
+import dismissKeyboard from 'dismissKeyboard';
 
 import {
     View,
@@ -66,6 +67,7 @@ class NavBar extends Component {
 
   handleMenuTap(){
     let { tapMenuIcon } = this.props;
+    dismissKeyboard()
     LayoutAnimation.spring();
     tapMenuIcon();
   }
