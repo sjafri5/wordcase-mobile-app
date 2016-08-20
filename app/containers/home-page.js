@@ -53,12 +53,12 @@ const mapDispatchToProps = (dispatch) => {
 class Index extends Component {
   constructor(props) {
     super(props);
-  }
+  };
 
-  handleWordInput(text){
+  handleWordInput(event){
     let { receiveWordInput } = this.props;
-    receiveWordInput(text);
-  }
+    receiveWordInput(event.nativeEvent.text);
+  };
 
   handleSubmit(){
     let { clearTextField, homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
@@ -167,9 +167,12 @@ class Index extends Component {
             </Text>
             <TextInput
               style={Styles.numericInputField}
+              autoFocus={true}
               placeholder={'e.g. cacophony'}
               value={homePage.wordInputField}
-              onChangeText= {this.handleWordInput.bind(this) }
+              onSubmitEditing= {this.handleSubmit.bind(this) }
+              onChange= {this.handleWordInput.bind(this) }
+              returnKeyType='search'
             />
           </View>
 
