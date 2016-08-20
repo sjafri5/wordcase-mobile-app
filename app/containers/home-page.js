@@ -8,7 +8,7 @@ import { Api, Async, RandomWords } from '../utils/require-utils';
 import Styles from './../stylesheets/home-styles';
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
-var dismissKeyboard = require('dismissKeyboard');
+import dismissKeyboard from 'dismissKeyboard';
 
 
 import * as homeActions from '../actions/home-actions';

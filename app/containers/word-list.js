@@ -7,7 +7,8 @@ import _ from 'underscore';
 
 import { NavBar } from './../containers/require-containers';
 import { Async } from '../utils/require-utils';
-import Styles from './../stylesheets/word-list-styles';
+import GStyles from '../stylesheets/global-styles';
+import Styles from '../stylesheets/word-list-styles';
 import * as wordListActions from '../actions/word-list-actions';
 
 import {
@@ -77,25 +78,31 @@ class WordList extends Component {
     }
 
     return (
-      <View style={Styles.container}>
+      <View style={GStyles.container}>
         <NavBar navigator={ navigator } />
-        <Text>
-          Select a Word from your list to view its definition:
-        </Text>
         <View>
-          <Picker
-            selectedValue={ wordList.selectedWord }
-            onValueChange={(word) => displayWord(word)}
-            >
-            { this.renderWords() }
-          </Picker>
+          <View style={GStyles.centered}>
+            <Text style={GStyles.header}>
+              Select a Word from your list to view its definition:
+            </Text>
+          </View>
           <View>
-            <Text>
-              Definition:
-            </Text>
-            <Text>
-              {definition}
-            </Text>
+            <View style={Styles.pickerContainer}>
+              <Picker
+                selectedValue={ wordList.selectedWord }
+                onValueChange={(word) => displayWord(word)}
+                >
+                { this.renderWords() }
+              </Picker>
+            </View>
+            <View>
+              <Text>
+                Definition:
+              </Text>
+              <Text>
+                {definition}
+              </Text>
+            </View>
           </View>
         </View>
       </View>

@@ -8,7 +8,11 @@ import {
 } from 'react-native';
 
 var Styles = StyleSheet.create({
-  submitButtonText: {
+  pickerContainer: {
+    marginLeft: 20,
+    marginRight: 20,
+    borderWidth: 1,
+    borderColor: 'black',
   }
 })
 
