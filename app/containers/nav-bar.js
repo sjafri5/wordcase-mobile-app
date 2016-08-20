@@ -132,14 +132,7 @@ class NavBar extends Component {
         onPress={ this.handleWordList.bind(this) }
         style= {Styles.navBarPanel}>
         <View>
-        <NavBarButton name={'Word List'}/>
-        </View>
-      </TouchableHighlight>
-      <TouchableHighlight
-        onPress={ this.handleTest.bind(this) }
-        style= {Styles.navBarPanel}>
-        <View>
-          <NavBarButton name={'Test'}/>
+        <NavBarButton name={'My Words'}/>
         </View>
       </TouchableHighlight>
     </View>

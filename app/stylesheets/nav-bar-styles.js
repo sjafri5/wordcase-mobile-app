@@ -37,7 +37,7 @@ var Styles = StyleSheet.create({
   },
   menuExpanded: {
     flex: 1,
-    height: 150
+    height: 100
   },
   sokowatchIconImage: {
     width: 20,
