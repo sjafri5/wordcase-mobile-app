@@ -13,6 +13,7 @@ import * as wordListActions from '../actions/word-list-actions';
 import {
     View,
     Text,
+    Picker,
     UIManager
 } from 'react-native'
 
@@ -28,6 +29,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     initializeWordList: (wordList)=>{
       dispatch(wordListActions.initializeWordList(wordList))
+    },
+    displayWord: (word)=>{
+      dispatch(wordListActions.displayWord(word))
     }
   }
 }
@@ -37,8 +41,17 @@ class WordList extends Component {
     super(props);
   }
 
+  getInitialState(){
+    return {
+      language: 'java'
+    }
+  }
+
   componentWillMount(){
     let { initializeWordList } = this.props;
+    this.setState({
+      language: 'java'
+    })
 
     Async.fetchWordList().then((response)=>{
       let wordList = JSON.parse(response)
@@ -48,31 +61,42 @@ class WordList extends Component {
   
   renderWords(){
     let { wordList } = this.props
-    let words = Object.keys(wordList)
+    let words = Object.keys(wordList.words)
     return _.map(words, (word) => {
-      return <View>
-          <Text>
-            { word }
-          </Text>
-          <Text>
-            { wordList[word].definition }
-          </Text>
-      </View>
+      return <Picker.Item label={word} value={word} />
     })
-
   }
 
   render(){
-    let { navigator } = this.props;
+    let { navigator, wordList, displayWord } = this.props;
+    let { words, selectedWord } = wordList;
+    let definition;
+
+    if (words[selectedWord] instanceof Array) {
+      definition = words[selectedWord][0].definition
+    }
 
     return (
       <View style={Styles.container}>
         <NavBar navigator={ navigator } />
         <Text>
-          Your Words:
+          Select a Word from your list to view its definition:
         </Text>
         <View>
-          { this.renderWords() }
+          <Picker
+            selectedValue={ wordList.selectedWord }
+            onValueChange={(word) => displayWord(word)}
+            >
+            { this.renderWords() }
+          </Picker>
+          <View>
+            <Text>
+              Definition:
+            </Text>
+            <Text>
+              {definition}
+            </Text>
+          </View>
         </View>
       </View>
     )
