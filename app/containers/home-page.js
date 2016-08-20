@@ -3,7 +3,7 @@ import { connect  } from 'react-redux';
 
 import { Button } from '../components/require-components';
 import { NavBar } from './require-containers';
-import { Api, Async } from '../utils/require-utils';
+import { Api, Async, RandomWords } from '../utils/require-utils';
 
 import Styles from './../stylesheets/home-styles';
 import ProgressBar from 'ProgressBarAndroid';
@@ -59,6 +59,15 @@ class Index extends Component {
     let { receiveWordInput } = this.props;
     receiveWordInput(event.nativeEvent.text);
   };
+
+  componentWillMount(){
+    let randomWord = _.sample(RandomWords)
+
+    this.setState({
+      randomWord
+    })
+
+  }
 
   handleSubmit(){
     let { clearTextField, homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
@@ -158,6 +167,8 @@ class Index extends Component {
 
   render() {
     let { homePage, navigator } = this.props;
+    let { randomWord } = this.state;
+
     return (
         <View style={Styles.container}>
           <NavBar navigator={ navigator } />
@@ -168,7 +179,7 @@ class Index extends Component {
             <TextInput
               style={Styles.numericInputField}
               autoFocus={true}
-              placeholder={'e.g. cacophony'}
+              placeholder={ 'e.g. ' + randomWord }
               value={homePage.wordInputField}
               onSubmitEditing= {this.handleSubmit.bind(this) }
               onChange= {this.handleWordInput.bind(this) }
