@@ -17,7 +17,19 @@ describe('HomePage', () => {
     }
     expect(reducer(undefined, action)).toEqual({
       words: action.wordList,
-      selectedWord: undefined
+      selectedWord: 'word'
+    })
+  })
+
+  it('handles DISPLAY_WORD', () => {
+    const action = {
+      type: types.DISPLAY_WORD,
+      word: 'Hello' 
+    }
+
+    expect(reducer(undefined, action)).toEqual({
+      words: {},
+      selectedWord: 'Hello'
     })
   })
 })
