@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 import { connect  } from 'react-redux';
 import _ from 'underscore';
 
-import NavBar from './../containers/nav-bar';
+import { NavBar } from './../containers/require-containers';
+import { Async } from '../utils/require-utils';
 import Styles from './../stylesheets/word-list-styles';
-
-import Async from '../utils/async';
+import * as wordListActions from '../actions/word-list-actions';
 
 import {
     View,
@@ -20,11 +20,15 @@ UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationE
 
 const mapStateToProps = (state) => {
   return {
+    wordList: state.wordList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    initializeWordList: (wordList)=>{
+      dispatch(wordListActions.initializeWordList(wordList))
+    }
   }
 }
 
@@ -34,12 +38,27 @@ class WordList extends Component {
   }
 
   componentWillMount(){
-    Async.fetchWordList().then((wordList)=>{
-      console.log('weodafasfsdfa', wordList);
+    let { initializeWordList } = this.props;
+
+    Async.fetchWordList().then((response)=>{
+      let wordList = JSON.parse(response)
+      initializeWordList(wordList)
     })
   }
   
   renderWords(){
+    let { wordList } = this.props
+    let words = Object.keys(wordList)
+    return _.map(words, (word) => {
+      return <View>
+          <Text>
+            { word }
+          </Text>
+          <Text>
+            { wordList[word].definition }
+          </Text>
+      </View>
+    })
 
   }
 

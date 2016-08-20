@@ -1,6 +1,6 @@
 import * as types from '../actions/action-types';
 
-const initialState = [];
+const initialState = {};
 
 export default function wordList(state = initialState, action = {}) {
   switch (action.type) {
