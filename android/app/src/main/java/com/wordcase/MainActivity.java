@@ -26,6 +26,7 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       Fabric.with(this, new Crashlytics());
+      FLog.setLoggingDelegate(ReactNativeFabricLogger.getInstance());
     }
 
     /**
