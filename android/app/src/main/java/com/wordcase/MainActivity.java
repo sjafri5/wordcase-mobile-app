@@ -6,6 +6,8 @@ import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
+
+import android.os.Bundle;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
