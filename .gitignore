@@ -43,3 +43,5 @@ android/keystores/debug.keystore
 # API Keys
 
 app/utils/secrets.js
+android/app/fabric.properties
+

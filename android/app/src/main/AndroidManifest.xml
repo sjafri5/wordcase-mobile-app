@@ -20,10 +20,14 @@
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
         <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="ec81dca6b476ec91a44fe27d36f6ba0262c9eb4e"
+        />
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
