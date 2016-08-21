@@ -62,7 +62,7 @@ class WordList extends Component {
   
   renderWords(){
     let { wordList } = this.props
-    let words = Object.keys(wordList.words)
+    let words = Object.keys(wordList.words).sort();
     return _.map(words, (word) => {
       return <Picker.Item label={word} value={word} />
     })
