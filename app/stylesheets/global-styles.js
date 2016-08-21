@@ -24,6 +24,14 @@ var Styles = StyleSheet.create({
     fontFamily: 'Roboto Bold',
     fontWeight: 'bold'
   },
+  wordHeader: {
+    marginTop: 15,
+    marginBottom: 15,
+    color: Colors.black,
+    fontSize: 20,
+    fontFamily: 'Roboto Bold',
+    fontWeight: 'bold'
+  },
 })
 
 module.exports = Styles;

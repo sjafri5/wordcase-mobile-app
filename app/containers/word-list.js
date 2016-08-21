@@ -95,13 +95,15 @@ class WordList extends Component {
                 { this.renderWords() }
               </Picker>
             </View>
-            <View>
-              <Text>
+            <View style={[Styles.definitionContainer]}>
+              <Text style={[GStyles.wordHeader]}>
                 Definition:
               </Text>
-              <Text>
-                {definition}
-              </Text>
+              <View style={GStyles.centered}>
+                <Text>
+                  {definition}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
