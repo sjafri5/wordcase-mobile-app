@@ -1,4 +1,13 @@
-package com.facebook.common.logging;
+/*
+ *  * Copyright (c) 2015-present, Facebook, Inc.
+ *   * All rights reserved.
+ *    *
+ *     * This source code is licensed under the BSD-style license found in the
+ *      * LICENSE file in the root directory of this source tree. An additional grant
+ *       * of patent rights can be found in the PATENTS file in the same directory.
+ *        */
+
+package com.wordcase;
 
 import com.facebook.common.logging.LoggingDelegate;
 
@@ -7,44 +16,24 @@ import java.io.StringWriter;
 
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+
 /**
  *  * Default implementation of {@link LoggingDelegate}.
  *   */
-//public class FLogDefaultLoggingDelegate implements LoggingDelegate {
-public class ReactNativeFabricLogger implements LoggingDelegate { 
+public class ReactNativeFabricLogger implements LoggingDelegate {
 
-  private void println(int priority, String tag, String msg) {
-    Log.println(priority, prefixTag(tag), msg);
-    if (BuildConfig.DEBUG) {
-      Log.println(priority, prefixTag(tag), msg);
-    } else {
-      Crashlytics.log(priority, prefixTag(tag), msg);
-    }
-  }
-  private void println(int priority, String tag, String msg, Throwable tr) {
-    Log.println(priority, prefixTag(tag), getMsg(msg, tr));
-    if (BuildConfig.DEBUG) {
-      Log.println(priority, prefixTag(tag), getMsg(msg, tr));
-    } else {
-      Crashlytics.log(priority, prefixTag(tag), msg);
-
-    }
-  }
-
-  //public static final FLogDefaultLoggingDelegate sInstance = new FLogDefaultLoggingDelegate();
   public static final ReactNativeFabricLogger sInstance = new ReactNativeFabricLogger();
 
   private String mApplicationTag = "unknown";
   private int mMinimumLoggingLevel = Log.WARN;
 
-  //public static FLogDefaultLoggingDelegate getInstance() {
   public static ReactNativeFabricLogger getInstance() {
     return sInstance;
 
   }
 
-  //private FLogDefaultLoggingDelegate() {
-  private ReactNativeFabricLogger() {}
+  private ReactNativeFabricLogger() {
 
   }
 
@@ -165,12 +154,24 @@ public class ReactNativeFabricLogger implements LoggingDelegate {
   }
 
   private void println(int priority, String tag, String msg) {
-    Log.println(priority, prefixTag(tag), msg);
+    if (BuildConfig.DEBUG) {
+      Log.println(priority, prefixTag(tag), msg);
+
+    } else {
+      Crashlytics.log(priority, prefixTag(tag), msg);
+
+    }
 
   }
 
   private void println(int priority, String tag, String msg, Throwable tr) {
-    Log.println(priority, prefixTag(tag), getMsg(msg, tr));
+    if (BuildConfig.DEBUG) {
+      Log.println(priority, prefixTag(tag), getMsg(msg, tr));
+
+    } else {
+      Crashlytics.log(priority, prefixTag(tag), msg);
+
+    }
 
   }
 
