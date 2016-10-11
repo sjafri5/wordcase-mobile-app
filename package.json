@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-     "test": "mocha --compilers js:babel-register --recursive"
+    "test": "mocha --compilers js:babel-register --recursive"
   },
   "dependencies": {
     "react": "^15.1.0",
-    "react-native": "^0.27.2"
+    "react-native": "^0.27.2",
+    "react-native-swiper": "^1.5.1",
+    "react-redux": "^4.0.0",
+    "redux": "^3.3.1"
   },
   "devDependencies": {
     "babel-register": "^6.9.0",

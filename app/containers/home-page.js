@@ -3,6 +3,7 @@ import { connect  } from 'react-redux';
 
 import { Button } from '../components/require-components';
 import { NavBar } from './require-containers';
+//import { Crashlytics } from 'react-native-fabric'
 import { Api, Async, RandomWords } from '../utils/require-utils';
 
 import Styles from './../stylesheets/home-styles';
@@ -71,12 +72,18 @@ class Index extends Component {
 
   handleSubmit(){
     let { clearTextField, homePage, submitWord, fetchDefinition, receiveDefinition } = this.props;
+    if (homePage.wordInputField == '') {
+      return;
+    }
     dismissKeyboard();
 
     submitWord();
     fetchDefinition();
     Api.getDefinition(homePage.wordInputField).then((response)=>{
       receiveDefinition(response);
+    }).catch((err)=> {
+      console.log('Houston we have a problem', err);
+      //Crashlytics.recordError('something went wrong!');
     })
   }
 

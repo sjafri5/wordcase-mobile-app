@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.facebook.common.logging.FLog;  
-import android.os.Bundle;
+//import android.os.Bundle;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
@@ -29,12 +29,12 @@ public class MainActivity extends ReactActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      Fabric.with(this, new Crashlytics());
-      FLog.setLoggingDelegate(ReactNativeFabricLogger.getInstance());
-    }
+    //@Override
+    //protected void onCreate(Bundle savedInstanceState) {
+      //super.onCreate(savedInstanceState);
+      //Fabric.with(this, new Crashlytics());
+      //FLog.setLoggingDelegate(ReactNativeFabricLogger.getInstance());
+    //}
 
     /**
      * Returns whether dev mode should be enabled.

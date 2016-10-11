@@ -7,6 +7,7 @@ import _ from 'underscore';
 
 import NavBar from './../containers/nav-bar';
 import Styles from './../stylesheets/test-styles';
+import Swiper from 'react-native-swiper'
 
 import {
     View,
@@ -30,15 +31,24 @@ class Test extends Component {
   constructor(props) {
     super(props);
   }
+
   render(){
     let { navigator } = this.props;
 
     return (
       <View style={Styles.container}>
         <NavBar navigator={ navigator } />
-        <Text>
-          this is the test page
-        </Text>
+        <Swiper style={Styles.wrapper} showsButtons={true}>
+          <View style={Styles.slide1}>
+            <Text style={Styles.text}>Hello Swiper</Text>
+          </View>
+          <View style={Styles.slide2}>
+            <Text style={Styles.text}>Beautiful</Text>
+          </View>
+          <View style={Styles.slide3}>
+            <Text style={Styles.text}>And simple</Text>
+          </View>
+        </Swiper>
       </View>
     )
   }

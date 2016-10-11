@@ -3,10 +3,11 @@ import * as secrets from './secrets';
 
 var Api = {
   getDefinition(word) {
-    let request = this.createRequestObject('GET', secrets.wordsTestKey)
-    let url = `https:\/\/wordsapiv1.p.mashape.com/words/${word}`
+    //let request = this.createRequestObject('GET', secrets.wordsTestKey)
+    //let url = `https:\/\/wordsapiv1.p.mashape.com/words/${word}`
+    let url = `https:\/\/owlbot.info/api/v1/dictionary/${word}?format=json`
 
-    return fetch(url, request)
+    return fetch(url)
       .then(function(response){
         return response.json();
       })
