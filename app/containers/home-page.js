@@ -5,7 +5,7 @@ import { Container, Button } from '../components/index';
 import NavigationBar from './navigation-bar';
 import { Api, Async, RandomWords } from '../utils/require-utils';
 
-import globalStyles from './../stylesheets/global-styles';
+import globalStyles from '../stylesheets/global-styles';
 import Colors from '../stylesheets/colors';
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
@@ -85,7 +85,7 @@ class Dashboard extends Component {
     })
   }
 
-  _renderDefinitions() {
+  renderDefinitions() {
     let { fetching, submitted, submittedWord, definitions } = this.props.homePage;
     if (fetching){
       return (
@@ -98,7 +98,7 @@ class Dashboard extends Component {
       return (
         <ScrollView style={Styles.definitionsContainer}>
           <View style={Styles.wordBox}>
-            <Text style={Styles.submittedWord}>
+            <Text style={[Styles.textGeneral, Styles.submittedWord]}>
               {submittedWord}:
             </Text>
             <View>
@@ -150,7 +150,7 @@ class Dashboard extends Component {
     return _.map(definitions.slice(0,2), (definition) => {
       return (
         <View style={Styles.definitionContainer}>
-          <Text style={Styles.definitionText}>
+          <Text style={[Styles.textGeneral, Styles.definitionText]}>
             -- {definition.definition}
           </Text>
           
@@ -163,7 +163,7 @@ class Dashboard extends Component {
   _renderSynonyms(definition){
     if (definition.synonyms) {
       return (
-        <Text style={Styles.definitionText}>
+        <Text style={[Styles.textGeneral, Styles.definitionText]}>
           Synonyms: {definition.synonyms.join(", ")}
         </Text>
       )
@@ -208,7 +208,7 @@ class Dashboard extends Component {
       <Container layoutType={'type3'}>
         <View>
           {this.renderForm()}
-          {this._renderDefinitions()}
+          {this.renderDefinitions()}
         </View>
         <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
       </Container>
@@ -245,14 +245,12 @@ const Styles = StyleSheet.create(
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 15,
-        color: Colors.black,
         fontSize: 25,
         fontFamily: 'Roboto Bold',
         fontWeight: 'bold'
       },
       definitionText: {
         marginBottom: 10,
-        color: Colors.black,
         fontSize: 15,
         fontFamily: 'Roboto Bold',
       },
@@ -264,8 +262,6 @@ const Styles = StyleSheet.create(
       definitionsContainer: {
         marginTop: 20,
         marginBottom: 30,
-        marginLeft: 15,
-        marginRight: 15,
       },
       definitionContainer: {
         marginBottom: 25,

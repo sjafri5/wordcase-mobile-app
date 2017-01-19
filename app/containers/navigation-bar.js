@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import globalStyles from '../stylesheets/global-styles';
 import { NavbarIcon } from '../components/index';
 
-const Styles = StyleSheet.create({
+const Styles = StyleSheet.create(Object.assign({}, globalStyles, {
   navbarContainer: {
     flex: 0.15,
     alignItems: 'center',
@@ -35,7 +36,7 @@ const Styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
   }
-});
+}));
 
 class NavigationBar extends Component {
   _handlePress(label){
@@ -59,9 +60,9 @@ class NavigationBar extends Component {
     return (
       <View style={Styles.navbarContainer} >
         <View style={Styles.iconsContainer} >
-          <NavbarIcon label={'Search'}    iconName={'search'} onPress={(scene) => this._handlePress(scene)} />
+          <NavbarIcon label={'Search'} iconName={'search'} onPress={(scene) => this._handlePress(scene)} />
           <NavbarIcon label={'Words'} iconName={'pencil'}  onPress={(scene) => this._handlePress(scene)} />
-          <NavbarIcon label={'Quiz'}  iconName={'cog'}  onPress={(scene) => this._handlePress(scene)} />
+          <NavbarIcon label={'Quiz'} iconName={'cog'}  onPress={(scene) => this._handlePress(scene)} />
         </View>
       </View>
     );

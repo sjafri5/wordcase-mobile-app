@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import globalStyles from '../stylesheets/global-styles'
 
-const Styles = StyleSheet.create({
+const Styles = StyleSheet.create(Object.assign({}, globalStyles, {
   navbarContainer: {
     flex: 0.15,
     alignItems: 'center',
@@ -35,7 +36,7 @@ const Styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
   }
-});
+}));
 
 class NavbarIcon extends Component {
   constructor(props){
