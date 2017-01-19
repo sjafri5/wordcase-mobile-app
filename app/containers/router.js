@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Navigator
+  Navigator,
+  StyleSheet,
+  Image
 } from 'react-native';
 
-import { HomePage, WordList, Test } from '../containers/require-containers'
+import { HomePage, WordList, Quiz } from './index'
 
 class Router extends Component {
   renderScene(route, navigator){
@@ -12,19 +14,30 @@ class Router extends Component {
       return <HomePage navigator={ navigator } />;
     case 'WordList':
       return <WordList navigator={ navigator } />;
-    case 'Test':
-      return <Test navigator={ navigator } />;
+    case 'Quiz':
+      return <Quiz navigator={ navigator } />;
     }
   }
   render() {
     return (
+      <Image source={require('../images/bg_gradient.png')} resizeMode={'stretch'} style={Styles.imageContainer}>
       <Navigator
         debugOverlay={false}
         renderScene={ this.renderScene.bind(this) }
         initialRoute={{name: 'HomePage'}}
       />
+      </Image>
     );
   }
 }
+
+const Styles = StyleSheet.create({
+  imageContainer: {
+    flex: 1,
+    margin: -2,
+    width: null,
+    height: null
+  }
+})
 
 module.exports = Router;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect  } from 'react-redux';
 
-import { Button } from '../components/require-components';
-import { NavBar } from './require-containers';
+import { Container, Button } from '../components/index';
+import NavigationBar from './navigation-bar';
 import { Api, Async, RandomWords } from '../utils/require-utils';
 
 import Styles from './../stylesheets/home-styles';
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class Index extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
   };
@@ -76,7 +76,10 @@ class Index extends Component {
     submitWord();
     fetchDefinition();
     Api.getDefinition(homePage.wordInputField).then((response)=>{
+      console.log('response?', response);
       receiveDefinition(response);
+    }).catch(error => {
+      console.log('---------', error);
     })
   }
 
@@ -170,15 +173,14 @@ class Index extends Component {
     let { randomWord } = this.state;
 
     return (
-        <View style={Styles.container}>
-          <NavBar navigator={ navigator } />
+      <Container layoutType={'type3'}>
+        <View>
           <View style={Styles.inputContainer}>
             <Text style={Styles.header}>
               Lookup a word:
             </Text>
             <TextInput
               style={Styles.numericInputField}
-              autoFocus={true}
               placeholder={ 'e.g. ' + randomWord }
               value={homePage.wordInputField}
               onSubmitEditing= {this.handleSubmit.bind(this) }
@@ -190,6 +192,8 @@ class Index extends Component {
           <Button text='Define' whenTapped={this.handleSubmit.bind(this)}/>
           {this._renderDefinitions()}
         </View>
+        <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
+      </Container>
     );
   }
 }
@@ -197,4 +201,4 @@ class Index extends Component {
 module.exports = connect(
                    mapStateToProps,
                    mapDispatchToProps
-                 )(Index);
+                 )(Dashboard);

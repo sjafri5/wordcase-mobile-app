@@ -149,16 +149,6 @@ class NavBar extends Component {
               Word Case
             </Text>
           </View>
-          <View style={Styles.menuIconButton}>
-            <TouchableWithoutFeedback
-              onPress={ this.handleMenuTap.bind(this) }
-            >
-              <Image 
-                style={Styles.menuIconImage}
-                resizeMode='stretch'
-                source={require('../images/icon-menu.png')} />
-            </TouchableWithoutFeedback>
-          </View>
         </View>
         <View style={[Styles.menuBase, navBar.expanded && Styles.menuExpanded]}>
           { navBar.expanded ? this.renderButtons() : null } 
