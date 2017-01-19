@@ -5,7 +5,8 @@ import { Container, Button } from '../components/index';
 import NavigationBar from './navigation-bar';
 import { Api, Async, RandomWords } from '../utils/require-utils';
 
-import Styles from './../stylesheets/home-styles';
+import globalStyles from './../stylesheets/global-styles';
+import Colors from '../stylesheets/colors';
 import ProgressBar from 'ProgressBarAndroid';
 import _ from 'underscore';
 import dismissKeyboard from 'dismissKeyboard';
@@ -21,7 +22,8 @@ import {
   AsyncStorage,
   ActionAlert,
   ToastAndroid,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native';
 
 const mapStateToProps = (state) => {
@@ -168,28 +170,44 @@ class Dashboard extends Component {
     }
   }
 
+  renderForm(){
+    const { homePage, navigator } = this.props;
+    const { randomWord } = this.state;
+
+    return (
+      <View style={Styles.foo}>
+        <View style={Styles.inputContainer}>
+          <Text style={Styles.textGeneral}>
+            Lookup a word:
+          </Text>
+          <TextInput
+            style={Styles.inputField}
+            placeholder={ 'e.g. ' + randomWord }
+            placeholderTextColor='white'
+            underlineColorAndroid='white'
+            value={homePage.wordInputField}
+            onSubmitEditing= {this.handleSubmit.bind(this) }
+            onChange= {this.handleWordInput.bind(this) }
+            returnKeyType='search'
+          />
+        </View>
+
+        <Button
+          name={'Define'}
+          type={'buttonSecondary'}
+          onPress={ this.handleSubmit.bind(this)}
+          />
+      </View>
+    )
+  };
+
   render() {
     let { homePage, navigator } = this.props;
-    let { randomWord } = this.state;
 
     return (
       <Container layoutType={'type3'}>
         <View>
-          <View style={Styles.inputContainer}>
-            <Text style={Styles.header}>
-              Lookup a word:
-            </Text>
-            <TextInput
-              style={Styles.numericInputField}
-              placeholder={ 'e.g. ' + randomWord }
-              value={homePage.wordInputField}
-              onSubmitEditing= {this.handleSubmit.bind(this) }
-              onChange= {this.handleWordInput.bind(this) }
-              returnKeyType='search'
-            />
-          </View>
-
-          <Button text='Define' whenTapped={this.handleSubmit.bind(this)}/>
+          {this.renderForm()}
           {this._renderDefinitions()}
         </View>
         <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
@@ -202,3 +220,71 @@ module.exports = connect(
                    mapStateToProps,
                    mapDispatchToProps
                  )(Dashboard);
+
+
+const Styles = StyleSheet.create(
+    Object.assign({}, globalStyles, {
+      container: {
+        flex: 1,
+      },
+      inputField: {
+        color: 'white'
+      },
+      inputContainer: {
+        marginTop: 20,
+        marginBottom: 30,
+      },
+      header: {
+        marginBottom: 10,
+        color: Colors.buttonBlue,
+        fontSize: 17,
+        fontFamily: 'Roboto Bold',
+        fontWeight: 'bold'
+      },
+      submittedWord: {
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 15,
+        color: Colors.black,
+        fontSize: 25,
+        fontFamily: 'Roboto Bold',
+        fontWeight: 'bold'
+      },
+      definitionText: {
+        marginBottom: 10,
+        color: Colors.black,
+        fontSize: 15,
+        fontFamily: 'Roboto Bold',
+      },
+      wordBox: {
+        borderColor: 'white',
+        borderWidth: 2,
+        backgroundColor: 'transparent',
+      },
+      definitionsContainer: {
+        marginTop: 20,
+        marginBottom: 30,
+        marginLeft: 15,
+        marginRight: 15,
+      },
+      definitionContainer: {
+        marginBottom: 25,
+        marginLeft: 15,
+        marginRight: 15,
+      },
+      dualButtonContainer: {
+        marginTop: 15,
+        marginBottom: 15,
+        flex: 1,
+        flexDirection: 'row'
+      },
+      firstBtnContainer: {
+        flex: 0.5,
+        alignSelf: 'flex-start'
+      },
+      secondBtnContainer: {
+        flex: 0.5,
+        alignSelf: 'flex-end'
+      },
+    })
+);

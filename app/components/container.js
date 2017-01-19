@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import globalStyles from '../stylesheets/global-styles';
 
-const Styles = StyleSheet.create({
+const Styles = StyleSheet.create(Object.assign({}, globalStyles, {
   mainContainer: {
     marginTop: 20,
     flex: 1,
@@ -23,8 +24,7 @@ const Styles = StyleSheet.create({
   containerFooter: {
     flex: 1,
   },
-
-});
+}));
 
 class Container extends Component {
   renderType1(){

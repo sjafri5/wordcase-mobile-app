@@ -1,28 +1,54 @@
-'use strict';
-
 import React, { Component } from 'react';
-import Styles from '../stylesheets/button-styles'
+import Colors from '../stylesheets/colors'
 
 import {
-  Text,
   View,
-  TouchableHighlight,
+  Text,
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native';
 
 class Button extends Component {
   render() {
+    let { name, onPress, type } = this.props;
     return (
-       <TouchableHighlight
-         style={[Styles.submitButton, Styles.marginTop]} 
-         underlayColor={'#202020'}
-         onPress={ () => this.props.whenTapped()}
-       >
-        <Text style={Styles.submitButtonText}>
-          {this.props.text}
-        </Text>
-      </TouchableHighlight>
-      );
+        <View style={Styles.buttonContainer}>
+            <TouchableHighlight
+              style={[Styles.submitButton, Styles[type]]} 
+              underlayColor={type == 'buttonPrimary' ? Colors.darkGreen : 'transparent'}
+              onPress={onPress} >
+             <Text style={Styles.submitButtonText}>
+               {name}
+             </Text>
+            </TouchableHighlight>
+        </View>
+    );
   }
-};
+}
 
 module.exports = Button;
+
+const Styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+  },
+  submitButton: {
+    height:50,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonPrimary: {
+    backgroundColor: Colors.green,
+  },
+  buttonSecondary: {
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  submitButtonText: {
+    fontSize: 18,
+    fontFamily: 'SourceSansPro-Regular',
+    color: Colors.white
+  },
+});
+
