@@ -7,8 +7,10 @@ import _ from 'underscore';
 
 import { NavBar } from './../containers/require-containers';
 import { Async } from '../utils/require-utils';
+import { Container } from '../components/index';
 import GStyles from '../stylesheets/global-styles';
 import Styles from '../stylesheets/word-list-styles';
+import NavigationBar from './navigation-bar';
 import * as wordListActions from '../actions/word-list-actions';
 
 import {
@@ -78,8 +80,7 @@ class WordList extends Component {
     }
 
     return (
-      <View style={GStyles.container}>
-        <NavBar navigator={ navigator } />
+      <Container layoutType={'type3'}>
         <View>
           <View style={GStyles.centered}>
             <Text style={GStyles.header}>
@@ -107,7 +108,8 @@ class WordList extends Component {
             </View>
           </View>
         </View>
-      </View>
+        <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
+      </Container>
     )
   }
 }

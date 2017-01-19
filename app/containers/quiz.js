@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import { connect  } from 'react-redux';
 import _ from 'underscore';
 
-import NavBar from './../containers/nav-bar';
+import { Container } from '../components/index';
+import NavigationBar from './navigation-bar';
 import Styles from './../stylesheets/test-styles';
 
 import {
@@ -34,12 +35,14 @@ class Test extends Component {
     let { navigator } = this.props;
 
     return (
-      <View style={Styles.container}>
-        <NavBar navigator={ navigator } />
-        <Text>
-          this is the test page
-        </Text>
-      </View>
+      <Container layoutType={'type3'}>
+        <View>
+          <Text>
+            this is the Quiz page
+          </Text>
+        </View>
+        <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
+      </Container>
     )
   }
 }
