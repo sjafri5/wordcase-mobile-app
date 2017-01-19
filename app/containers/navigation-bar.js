@@ -6,6 +6,7 @@ import { NavbarIcon } from '../components/index';
 const Styles = StyleSheet.create(Object.assign({}, globalStyles, {
   navbarContainer: {
     flex: 0.15,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
