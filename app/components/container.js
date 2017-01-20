@@ -16,10 +16,10 @@ const Styles = StyleSheet.create(Object.assign({}, globalStyles, {
     marginBottom: 20,
   },
   containerBodyType2: {
-    flex: 11,
+    flex: 9,
   },
   containerBody: {
-    flex: 10,
+    flex: 8,
   },
   containerFooter: {
     flex: 1,

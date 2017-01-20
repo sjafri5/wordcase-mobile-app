@@ -89,14 +89,15 @@ class Dashboard extends Component {
     let { fetching, submitted, submittedWord, definitions } = this.props.homePage;
     if (fetching){
       return (
-        <View style={Styles.definitionsContainer}>
+        <View style={Styles.resultsContainer}>
           <ProgressBar />
         </View>
       );
     }
     else if (submitted) {
       return (
-        <ScrollView style={Styles.definitionsContainer}>
+        <View style={[Styles.resultsContainer]}>
+          <ScrollView>
           <View style={Styles.wordBox}>
             <Text style={[Styles.textGeneral, Styles.submittedWord]}>
               {submittedWord}:
@@ -108,7 +109,8 @@ class Dashboard extends Component {
           <View>
             {this._renderButtons()}
           </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       )
     }
   }
@@ -117,10 +119,18 @@ class Dashboard extends Component {
     return (
       <View style={Styles.dualButtonContainer}>
         <View style={Styles.firstBtnContainer}>
-          <Button text='Discard' whenTapped={this.handleDiscard.bind(this)}/>
+          <Button
+            name={'Discard'}
+            type={'buttonSecondary'}
+            onPress={ this.handleDiscard.bind(this)}
+            />
         </View>
         <View style={Styles.secondBtnContainer}>
-          <Button text='Keep' whenTapped={this.handleKeep.bind(this)}/>
+          <Button
+            name={'Save'}
+            type={'buttonSecondary'}
+            onPress={ this.handleKeep.bind(this)}
+            />
         </View>
       </View>
     )
@@ -175,7 +185,7 @@ class Dashboard extends Component {
     const { randomWord } = this.state;
 
     return (
-      <View style={Styles.foo}>
+      <View style={Styles.formContainer}>
         <View style={Styles.inputContainer}>
           <Text style={Styles.textGeneral}>
             Lookup a word:
@@ -206,7 +216,7 @@ class Dashboard extends Component {
 
     return (
       <Container layoutType={'type3'}>
-        <View>
+        <View style={Styles.pageContainer}>
           {this.renderForm()}
           {this.renderDefinitions()}
         </View>
@@ -224,8 +234,16 @@ module.exports = connect(
 
 const Styles = StyleSheet.create(
     Object.assign({}, globalStyles, {
-      container: {
+      pageContainer: {
         flex: 1,
+        flexDirection: 'column'
+      },
+      formContainer: {
+        flex: 1,
+      },
+      resultsContainer: {
+        marginTop: 30,
+        flex: 2,
       },
       inputField: {
         color: 'white'
@@ -275,10 +293,12 @@ const Styles = StyleSheet.create(
         flexDirection: 'row'
       },
       firstBtnContainer: {
+        paddingRight: 5,
         flex: 0.5,
         alignSelf: 'flex-start'
       },
       secondBtnContainer: {
+        paddingLeft: 5,
         flex: 0.5,
         alignSelf: 'flex-end'
       },
