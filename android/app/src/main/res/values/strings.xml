@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">C86e2Upd2XrtREyMw676Cl-QJMBlNytxDRU-G</string>
     <string name="app_name">Wordcase</string>
 </resources>
