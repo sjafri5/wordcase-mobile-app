@@ -19,19 +19,7 @@ const modalStyles = StyleSheet.create({
     padding: 20,
   },
   innerContainer: {
-    height: 200,
-  },
-  innerContainerDeleteAcct:{
-    flexDirection: 'column',
-    height: 430
-  },
-  innerContainerDeleteAcct:{
-    flexDirection: 'column',
-    height: 300
-  },
-  innerContainerInfoModal: {
-    flexDirection: 'column',
-    height: 500
+    height: 400,
   },
   textContainer: {
     marginBottom: 20
@@ -86,38 +74,16 @@ class ModalContent extends Component {
     let { onCancel } = this.props;
     return (
         <View style={[modalStyles.outerContainer, modalStyles.modalBackgroundStyle]}>
-          <View style={[modalStyles.innerContainerInfoModal, modalStyles.innerContainerTransparentStyle]}>
-            <View style={[modalStyles.textContainer, modalStyles.paragraph1]}>
-              <View style={modalStyles.modalSubheaderContainer}>
-                <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
-                  Cash Tank asks you put your spending in one of two categories:
-                </Text>
-              </View>
-            </View>
+          <View style={[modalStyles.innerContainer, modalStyles.innerContainerTransparentStyle]}>
             <View style={[modalStyles.textContainer, modalStyles.paragraph2]}>
               <View style={modalStyles.modalHeaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalHeader]}>
-                  Necessary
+                  My Word
                 </Text>
               </View>
               <View style={modalStyles.modalSubheaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
-                  Bills and payments that don't feel optional
-                </Text>
-              </View>
-            </View>
-            <View style={[modalStyles.textContainer, modalStyles.paragraph3]}>
-              <View style={modalStyles.modalHeaderContainer}>
-                <Text style={[modalStyles.textGeneral, modalStyles.modalHeader]}>
-                  Discretionary
-                </Text>
-              </View>
-              <View style={modalStyles.modalSubheaderContainer}>
-                <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
-                  Money you spend because you want to. Not because someone is telling you to. Coffee, movies, a third pair of jeans.
-                </Text>
-                <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader, modalStyles.paragraphSpacing]}>
-                  Ballpark guesses are just fine in Cash Tank.
+                  This is the main definition of the word.
                 </Text>
               </View>
             </View>
@@ -125,7 +91,7 @@ class ModalContent extends Component {
               <Button
                 name={'Will Do!'}
                 type={'buttonPrimary'}
-                onPress={onCancel}
+                onPress={() => { console.log('---------') }}
                 />
             </View>
           </View>
