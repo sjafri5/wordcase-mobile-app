@@ -9,13 +9,14 @@ import _ from 'underscore';
 var GiftedListView = require('react-native-gifted-listview');
 import { NavBar } from './../containers/require-containers';
 import { Async } from '../utils/require-utils';
-import { Container, LeadPanel } from '../components/index';
+import { Container, LeadPanel, ModalContent } from '../components/index';
 import NavigationBar from './navigation-bar';
 import * as wordListActions from '../actions/word-list-actions';
 
 import {
     View,
     Text,
+    Modal,
     TouchableHighlight,
     Picker,
     UIManager
@@ -116,6 +117,19 @@ class WordList extends Component {
     return <View style={Styles.separator} />
   };
 
+  renderModal(){
+    return (
+        <Modal
+          animationType={"fade"}
+          transparent={true}
+          visible={true}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+          <ModalContent onCancel={false} />
+        </Modal>
+    );
+  }
+
   render(){
     let { navigator, wordList, displayWord } = this.props;
     let { words, selectedWord } = wordList;
@@ -128,6 +142,7 @@ class WordList extends Component {
     return (
       <Container layoutType={'type3'} sideMargins={false}>
         <View>
+          { this.renderModal() }
           {this.renderScroll()}
         </View>
         <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
