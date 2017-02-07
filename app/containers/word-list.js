@@ -5,17 +5,18 @@ import { bindActionCreators } from 'redux';
 import { connect  } from 'react-redux';
 import _ from 'underscore';
 
+
+var GiftedListView = require('react-native-gifted-listview');
 import { NavBar } from './../containers/require-containers';
 import { Async } from '../utils/require-utils';
-import { Container } from '../components/index';
-import GStyles from '../stylesheets/global-styles';
-import Styles from '../stylesheets/word-list-styles';
+import { Container, LeadPanel } from '../components/index';
 import NavigationBar from './navigation-bar';
 import * as wordListActions from '../actions/word-list-actions';
 
 import {
     View,
     Text,
+    TouchableHighlight,
     Picker,
     UIManager
 } from 'react-native'
@@ -39,22 +40,17 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class WordList extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Styles = {
+  separator: {
+    height: 1, 
+    backgroundColor: '#ccc'
+  },
+}
 
-  getInitialState(){
-    return {
-      language: 'java'
-    }
-  }
+class WordList extends Component {
 
   componentWillMount(){
     let { initializeWordList } = this.props;
-    this.setState({
-      language: 'java'
-    })
 
     Async.fetchWordList().then((response)=>{
       let wordList = JSON.parse(response)
@@ -70,6 +66,56 @@ class WordList extends Component {
     })
   }
 
+  _onFetch(page = 1, callback, options) {
+    Async.fetchWordList().then((response)=>{
+      let wordList = JSON.parse(response)
+      console.log('wordlist', wordList);
+      let words = Object.keys(wordList);
+      callback(words);
+      //initializeWordList(wordList)
+    })
+  }
+
+  renderScroll(){
+    const { subTransaction } = this.props;
+
+    return <View style={Styles.container}>
+      <View style={Styles.navBar} />
+      <GiftedListView
+        rowView={this._panel.bind(this)}
+        onFetch={this._onFetch}
+        firstLoader={true} // display a loader for the first fetching
+        pagination={false} // enable infinite scrolling using touch to load more
+        refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
+        withSections={false} // enable sections
+        renderSeparator={this._renderSeparatorView}
+        refreshableTintColor="blue"
+      />
+      </View> 
+  };
+
+  _panel(rowData){
+    console.log('rowData', rowData);
+    return <LeadPanel 
+             leftContent={rowData} 
+             onPress={(transaction) => console.log('goo')}
+           />
+    //return (
+        //<TouchableHighlight
+        //style={Styles.row}
+        //underlayColor='#c8c7cc'
+        //onPress={() => this._onPress(rowData)}
+        //>
+        //<Text>{rowData}</Text>
+        //</TouchableHighlight>
+
+        //);
+  };
+
+  _renderSeparatorView(id) {
+    return <View style={Styles.separator} />
+  };
+
   render(){
     let { navigator, wordList, displayWord } = this.props;
     let { words, selectedWord } = wordList;
@@ -80,40 +126,15 @@ class WordList extends Component {
     }
 
     return (
-      <Container layoutType={'type3'}>
+      <Container layoutType={'type3'} sideMargins={false}>
         <View>
-          <View style={GStyles.centered}>
-            <Text style={GStyles.header}>
-              Select a Word from your list to view its definition:
-            </Text>
-          </View>
-          <View>
-            <View style={Styles.pickerContainer}>
-              <Picker
-                selectedValue={ wordList.selectedWord }
-                onValueChange={(word) => displayWord(word)}
-                >
-                { this.renderWords() }
-              </Picker>
-            </View>
-            <View style={[Styles.definitionContainer]}>
-              <Text style={[GStyles.wordHeader]}>
-                Definition:
-              </Text>
-              <View style={GStyles.centered}>
-                <Text>
-                  {definition}
-                </Text>
-              </View>
-            </View>
-          </View>
+          {this.renderScroll()}
         </View>
         <NavigationBar navigator={navigator} currentScene={'Dashboard'} />
       </Container>
     )
   }
 }
-
 module.exports = connect(
                    mapStateToProps,
                    mapDispatchToProps

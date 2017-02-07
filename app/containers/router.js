@@ -24,7 +24,7 @@ class Router extends Component {
       <Navigator
         debugOverlay={false}
         renderScene={ this.renderScene.bind(this) }
-        initialRoute={{name: 'HomePage'}}
+        initialRoute={{name: 'WordList'}}
       />
       </Image>
     );

@@ -56,7 +56,7 @@ class Container extends Component {
     // no topbar / navbar
     return (
       <View style={Styles.mainContainer}>
-        <View style={[Styles.containerBodyType2, Styles.standardSideMargins]}>
+        <View style={[Styles.containerBodyType2, this.props.sideMargins && Styles.standardSideMargins]}>
           { this.props.children[0] }
         </View>
         <View style={Styles.containerFooter}>

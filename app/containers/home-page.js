@@ -215,7 +215,7 @@ class Dashboard extends Component {
     let { homePage, navigator } = this.props;
 
     return (
-      <Container layoutType={'type3'}>
+      <Container layoutType={'type3'} sideMargins={true}>
         <View style={Styles.pageContainer}>
           {this.renderForm()}
           {this.renderDefinitions()}

@@ -63,7 +63,6 @@ class NavigationBar extends Component {
         <View style={Styles.iconsContainer} >
           <NavbarIcon label={'Search'} iconName={'search'} onPress={(scene) => this._handlePress(scene)} />
           <NavbarIcon label={'Words'} iconName={'pencil'}  onPress={(scene) => this._handlePress(scene)} />
-          <NavbarIcon label={'Quiz'} iconName={'cog'}  onPress={(scene) => this._handlePress(scene)} />
         </View>
       </View>
     );
