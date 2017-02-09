@@ -26,7 +26,8 @@ UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationE
 
 const mapStateToProps = (state) => {
   return {
-    wordList: state.wordList
+    wordList: state.wordList,
+    modal: state.modal
   }
 }
 
@@ -122,7 +123,7 @@ class WordList extends Component {
         <Modal
           animationType={"fade"}
           transparent={true}
-          visible={true}
+          visible={this.props.modal.modalOpen}
           onRequestClose={() => {alert("Modal has been closed.")}}
           >
           <ModalContent onCancel={false} />

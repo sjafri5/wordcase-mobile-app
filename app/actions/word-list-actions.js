@@ -13,3 +13,9 @@ export function displayWord(word) {
     word  
   };
 };
+
+export function toggleModal() {
+  return {
+    type: types.TOGGLE_MODAL
+  };
+};
