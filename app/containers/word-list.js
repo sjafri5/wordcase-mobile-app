@@ -36,6 +36,9 @@ const mapDispatchToProps = (dispatch) => {
     initializeWordList: (wordList)=>{
       dispatch(wordListActions.initializeWordList(wordList))
     },
+    toggleModal: ()=>{
+      dispatch(wordListActions.toggleModal())
+    },
     displayWord: (word)=>{
       dispatch(wordListActions.displayWord(word))
     }
@@ -96,23 +99,20 @@ class WordList extends Component {
       </View> 
   };
 
-  _panel(rowData){
-    console.log('rowData', rowData);
+  _panel(word){
+    console.log('rowData', word);
     return <LeadPanel 
-             leftContent={rowData} 
-             onPress={(transaction) => console.log('goo')}
+             leftContent={word} 
+             onPress={(word) => this._openDefinition(word)}
            />
-    //return (
-        //<TouchableHighlight
-        //style={Styles.row}
-        //underlayColor='#c8c7cc'
-        //onPress={() => this._onPress(rowData)}
-        //>
-        //<Text>{rowData}</Text>
-        //</TouchableHighlight>
-
-        //);
   };
+
+  _openDefinition(word){
+    const { toggleModal } = this.props;
+    
+    toggleModal();
+    console.log('word ohm', word);
+  }
 
   _renderSeparatorView(id) {
     return <View style={Styles.separator} />
@@ -135,6 +135,7 @@ class WordList extends Component {
     let { navigator, wordList, displayWord } = this.props;
     let { words, selectedWord } = wordList;
     let definition;
+    console.log('worsadfasdfasfdasfasfd', this.props.modal);
 
     if (words[selectedWord] instanceof Array) {
       definition = words[selectedWord][0].definition

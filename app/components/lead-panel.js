@@ -67,7 +67,7 @@ class LeadPanel extends Component {
     let { leftContent, rightContent, onPress, transaction, selectable, isGifted } = this.props;
     return (
       <TouchableHighlight
-       onPress={() => onPress(transaction)}
+       onPress={() => onPress(leftContent)}
        underlayColor={'transparent'}
        style={[Styles.transactionPanel, !isGifted && Styles.panelBorder]}
       >

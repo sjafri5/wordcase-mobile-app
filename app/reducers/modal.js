@@ -7,7 +7,7 @@ const initialState = {
 
 export default function homePage(state = initialState, action = {}) {
   switch (action.type) {
-    case types.toggleModal:
+    case types.TOGGLE_MODAL:
       return Object.assign({}, state, {
         modalOpen: !state.modalOpen,
       })
