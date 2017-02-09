@@ -89,9 +89,9 @@ class ModalContent extends Component {
             </View>
             <View style={modalStyles.buttonContainer}>
               <Button
-                name={'Will Do!'}
+                name={'Ok'}
                 type={'buttonPrimary'}
-                onPress={() => { console.log('---------') }}
+                onPress={onCancel}
                 />
             </View>
           </View>

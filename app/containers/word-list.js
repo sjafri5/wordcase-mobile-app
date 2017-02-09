@@ -119,14 +119,15 @@ class WordList extends Component {
   };
 
   renderModal(){
+    const { toggleModal } = this.props;
+
     return (
         <Modal
           animationType={"fade"}
           transparent={true}
           visible={this.props.modal.modalOpen}
-          onRequestClose={() => {alert("Modal has been closed.")}}
           >
-          <ModalContent onCancel={false} />
+          <ModalContent onCancel={toggleModal} />
         </Modal>
     );
   }
