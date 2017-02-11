@@ -7,10 +7,11 @@ export function initializeWordList(wordList) {
   };
 };
 
-export function displayWord(word) {
+export function displayWord(word, definition) {
   return {
     type: types.DISPLAY_WORD,
-    word  
+    word,
+    definition
   };
 };
 

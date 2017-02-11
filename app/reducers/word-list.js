@@ -13,10 +13,6 @@ export default function wordList(state = initialState, action = {}) {
         words: action.wordList,
         selectedWord: words[0]
       })
-    case types.DISPLAY_WORD:
-      return Object.assign({}, state, {
-        selectedWord: action.word,
-      })
     default:
       return state;
   }

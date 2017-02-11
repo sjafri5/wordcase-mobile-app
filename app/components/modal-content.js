@@ -78,7 +78,7 @@ class ModalContent extends Component {
             <View style={[modalStyles.textContainer, modalStyles.paragraph2]}>
               <View style={modalStyles.modalHeaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalHeader]}>
-                  My Word
+                  
                 </Text>
               </View>
               <View style={modalStyles.modalSubheaderContainer}>

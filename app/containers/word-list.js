@@ -39,8 +39,8 @@ const mapDispatchToProps = (dispatch) => {
     toggleModal: ()=>{
       dispatch(wordListActions.toggleModal())
     },
-    displayWord: (word)=>{
-      dispatch(wordListActions.displayWord(word))
+    displayWord: (word, definition)=>{
+      dispatch(wordListActions.displayWord(word, definition))
     }
   }
 }
@@ -53,16 +53,6 @@ const Styles = {
 }
 
 class WordList extends Component {
-
-  componentWillMount(){
-    let { initializeWordList } = this.props;
-
-    Async.fetchWordList().then((response)=>{
-      let wordList = JSON.parse(response)
-      initializeWordList(wordList)
-    })
-  }
-  
   renderWords(){
     let { wordList } = this.props
     let words = Object.keys(wordList.words).sort();
@@ -72,12 +62,14 @@ class WordList extends Component {
   }
 
   _onFetch(page = 1, callback, options) {
+    let { initializeWordList } = this.props;
+
     Async.fetchWordList().then((response)=>{
       let wordList = JSON.parse(response)
-      console.log('wordlist', wordList);
+      initializeWordList(wordList)
+
       let words = Object.keys(wordList);
       callback(words);
-      //initializeWordList(wordList)
     })
   }
 
@@ -88,7 +80,7 @@ class WordList extends Component {
       <View style={Styles.navBar} />
       <GiftedListView
         rowView={this._panel.bind(this)}
-        onFetch={this._onFetch}
+        onFetch={this._onFetch.bind(this)}
         firstLoader={true} // display a loader for the first fetching
         pagination={false} // enable infinite scrolling using touch to load more
         refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
@@ -100,7 +92,6 @@ class WordList extends Component {
   };
 
   _panel(word){
-    console.log('rowData', word);
     return <LeadPanel 
              leftContent={word} 
              onPress={(word) => this._openDefinition(word)}
@@ -108,10 +99,11 @@ class WordList extends Component {
   };
 
   _openDefinition(word){
-    const { toggleModal } = this.props;
-    
+    const { wordList, displayWord, toggleModal } = this.props;
+    const definition = wordList.words[word]
+
+    displayWord(word, definition);
     toggleModal();
-    console.log('word ohm', word);
   }
 
   _renderSeparatorView(id) {
@@ -133,10 +125,9 @@ class WordList extends Component {
   }
 
   render(){
-    let { navigator, wordList, displayWord } = this.props;
+    let { navigator, wordList } = this.props;
     let { words, selectedWord } = wordList;
     let definition;
-    console.log('worsadfasdfasfdasfasfd', this.props.modal);
 
     if (words[selectedWord] instanceof Array) {
       definition = words[selectedWord][0].definition
