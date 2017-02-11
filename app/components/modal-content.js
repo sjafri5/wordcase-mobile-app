@@ -71,19 +71,19 @@ const modalStyles = StyleSheet.create({
 
 class ModalContent extends Component {
   render() {
-    let { onCancel } = this.props;
+    let { selectedWord, onCancel } = this.props;
     return (
         <View style={[modalStyles.outerContainer, modalStyles.modalBackgroundStyle]}>
           <View style={[modalStyles.innerContainer, modalStyles.innerContainerTransparentStyle]}>
             <View style={[modalStyles.textContainer, modalStyles.paragraph2]}>
               <View style={modalStyles.modalHeaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalHeader]}>
-                  
+                  {selectedWord.word}
                 </Text>
               </View>
               <View style={modalStyles.modalSubheaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
-                  This is the main definition of the word.
+                  {selectedWord.definition[0].definition}
                 </Text>
               </View>
             </View>

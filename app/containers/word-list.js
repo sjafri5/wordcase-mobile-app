@@ -111,15 +111,15 @@ class WordList extends Component {
   };
 
   renderModal(){
-    const { toggleModal } = this.props;
+    const { modal, toggleModal } = this.props;
 
     return (
         <Modal
           animationType={"fade"}
           transparent={true}
-          visible={this.props.modal.modalOpen}
+          visible={modal.modalOpen}
           >
-          <ModalContent onCancel={toggleModal} />
+          <ModalContent selectedWord={modal.selectedWord} onCancel={toggleModal} />
         </Modal>
     );
   }
