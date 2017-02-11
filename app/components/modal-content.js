@@ -83,7 +83,12 @@ class ModalContent extends Component {
               </View>
               <View style={modalStyles.modalSubheaderContainer}>
                 <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
-                  {selectedWord.definition[0].definition}
+                  --{selectedWord.definition[0].definition}
+                </Text>
+              </View>
+              <View style={modalStyles.modalSubheaderContainer}>
+                <Text style={[modalStyles.textGeneral, modalStyles.modalSubheader]}>
+                  --{selectedWord.definition[1].definition}
                 </Text>
               </View>
             </View>
